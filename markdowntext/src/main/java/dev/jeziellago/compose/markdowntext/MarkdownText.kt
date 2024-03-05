@@ -91,6 +91,7 @@ fun MarkdownText(
     style: TextStyle = LocalTextStyle.current,
     @IdRes viewId: Int? = null,
     onClick: (() -> Unit)? = null,
+    onLongClick: ((markdown:String) -> Boolean)? = null,
     // this option will disable all clicks on links, inside the markdown text
     // it also enable the parent view to receive the click event
     disableLinkMovementMethod: Boolean = false,
@@ -113,6 +114,7 @@ fun MarkdownText(
             TextView(factoryContext).apply {
                 viewId?.let { id = viewId }
                 onClick?.let { setOnClickListener { onClick() } }
+                onLongClick?.let { setOnLongClickListener { onLongClick(markdown) } }
                 fontResource?.let { font -> applyFontResource(font) }
 
                 setMaxLines(maxLines)
